@@ -1,22 +1,22 @@
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v1');
-  await cache.addAll(resources);
-};
+  const cache = await caches.open('v1')
+  await cache.addAll(resources)
+}
 
 const enableNavigationPreload = async () => {
   if (self.registration.navigationPreload) {
-    await self.registration.navigationPreload.enable();
+    await self.registration.navigationPreload.enable()
   }
-};
+}
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(enableNavigationPreload());
-});
+  event.waitUntil(enableNavigationPreload())
+})
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     addResourcesToCache([
       '/',
     ]),
-  );
-});
+  )
+})
