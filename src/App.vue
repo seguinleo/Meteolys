@@ -434,7 +434,7 @@ watch(theme, (t) => {
             <button v-for="result in cityResults" :key="result.id" type="button" class="city-result"
               @click="selectCity(result)">
               {{ result.name }},
-              {{ result.admin2 }},
+              {{ result.admin2 || result.admin1 }},
               {{ result.country_code }}
             </button>
           </div>
