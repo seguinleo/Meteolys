@@ -1,4 +1,5 @@
 import express from 'express'
+import rateLimit from 'express-rate-limit'
 import dotenvx from '@dotenvx/dotenvx'
 
 dotenvx.config({
@@ -7,40 +8,43 @@ dotenvx.config({
 
 const app = express()
 
+app.disable('x-powered-by')
+app.set('trust proxy', 1)
+
 const { API_KEY } = process.env
 
-let cache = {
-  data: null,
-  timestamp: 0
-}
+const limiter = rateLimit({
+  windowMs: 3 * 60 * 1000,
+  max: 50,
+  message: 'Too many requests, please try again later.',
+})
 
-const CACHE_TTL = 10 * 60 * 1000
-
-app.get('/api/vigilance/:dep', async (req, res) => {
+app.get('/api/vigilance/:dep', limiter, async (req, res) => {
   try {
     const { dep } = req.params
 
-    const now = Date.now()
-
-    if (!cache.data || now - cache.timestamp > CACHE_TTL) {
-      const response = await fetch(
-        'https://public-api.meteofrance.fr/public/DPVigilance/v1/cartevigilance/encours',
-        {
-          headers: {
-            apikey: API_KEY
-          }
-        }
-      )
-
-      if (!response.ok) {
-        throw new Error(await response.text())
-      }
-
-      cache.data = await response.json()
-      cache.timestamp = now
+    if (!/^\d{2,3}$/.test(dep)) {
+      return res.status(400).json({ error: "Département invalide" })
     }
 
-    const department = cache.data.product.periods[0].timelaps.domain_ids.find(
+    const url = 'https://public-api.meteofrance.fr/public/DPVigilance/v1/cartevigilance/encours'
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 5000)
+
+    const response = await fetch(url, {
+      headers: { apikey: API_KEY },
+      signal: controller.signal
+    })
+
+    clearTimeout(timeout)
+
+    if (!response.ok) {
+      throw new Error(await response.text())
+    }
+
+    const data = await response.json()
+
+    const department = data?.product?.periods?.[0]?.timelaps?.domain_ids?.find(
       d => d.domain_id === dep
     )
 

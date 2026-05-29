@@ -48,11 +48,23 @@ const setError = (msg) => {
   }, 5000)
 }
 
+let canFetch = true
+
 const fetchWeather = async () => {
+  if (!canFetch) return
+
+  canFetch = false
+
+  setTimeout(() => {
+    canFetch = true
+  }, 2000)
+
   weather.value = null
   vigilance.value = null
 
-  if (!city.value) {
+  const cityName = city.value.trim()
+
+  if (!cityName) {
     setError('Veuillez saisir une ville')
     return
   }
@@ -61,7 +73,7 @@ const fetchWeather = async () => {
 
   try {
     const geoResponse = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city.value)}&count=10&language=fr&format=json`
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=10&language=fr&format=json`
     )
 
     if (!geoResponse.ok) {
@@ -83,8 +95,6 @@ const fetchWeather = async () => {
 
     cityResults.value = geoData.results
     showCityResults.value = true
-
-    return
   } catch (err) {
     setError(err.message)
   } finally {
@@ -330,6 +340,10 @@ onMounted(() => {
   const savedCity = localStorage.getItem('city')
   if (savedCity) city.value = savedCity
   window.addEventListener('resize', handleResize)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .catch(err => console.warn('PWA registration failed:', err))
+  }
 })
 
 onUnmounted(() => {
@@ -495,7 +509,7 @@ watch(theme, (t) => {
           <div ref="chartRef" class="chart"></div>
           <div class="images-chart">
             <img v-for="(item, index) in todayChart" :key="index" :src="getWeatherImage(item.weather, item.isDay)"
-              width="16" height="16">
+              width="12" height="12">
           </div>
         </section>
         <section class="align-center">
@@ -503,7 +517,7 @@ watch(theme, (t) => {
           <div ref="chartTomorrowRef" class="chart"></div>
           <div class="images-chart">
             <img v-for="(item, index) in tomorrowChart" :key="index" :src="getWeatherImage(item.weather, item.isDay)"
-              width="16" />
+              width="12" height="12">
           </div>
         </section>
         <section class="daydetails">
