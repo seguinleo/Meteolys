@@ -28,11 +28,11 @@ export const phenomenonMap = {
   },
   2: {
     label: 'Pluie-inondation',
-    icon: '🌧'
+    icon: '🌧️'
   },
   3: {
     label: 'Orages',
-    icon: '⛈'
+    icon: '🌩️'
   },
   4: {
     label: 'Inondation',
@@ -48,7 +48,7 @@ export const phenomenonMap = {
   },
   7: {
     label: 'Grand froid',
-    icon: '🥶'
+    icon: '❄️'
   },
   8: {
     label: 'Avalanches',

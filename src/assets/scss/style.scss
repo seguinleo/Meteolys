@@ -17,6 +17,7 @@
 html {
   color: #fff;
   -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
   -webkit-user-select: none;
   user-select: none;
   scroll-behavior: smooth;
@@ -116,9 +117,9 @@ dialog.alert-dialog {
 }
 
 .close-dialog {
-  position: absolute;
   top: 10px;
   right: 10px;
+  margin-bottom: 1rem;
   background: none;
   border: none;
   font-size: 1.5rem;
