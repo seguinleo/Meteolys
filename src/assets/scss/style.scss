@@ -126,17 +126,6 @@ dialog.alert-dialog {
   cursor: pointer;
 }
 
-.city-results {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-}
-
-.city-result {
-  padding: 10px;
-  text-align: left;
-}
-
 header {
   padding: 0 1rem;
   text-align: right;
@@ -196,6 +185,20 @@ header {
       color: #fff;
       opacity: .7;
     }
+  }
+
+  .city-results {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .city-result {
+    margin: 5px auto;
+    font-size: .9rem;
+    padding: 10px;
+    text-align: left;
+    height: auto;
   }
 
   button {
