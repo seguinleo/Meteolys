@@ -72,6 +72,7 @@ const fetchWeather = async () => {
 
   weather.value = null
   vigilance.value = null
+  weatherModel.value = ''
 
   const cityName = city.value.trim()
 
@@ -233,10 +234,10 @@ const selectCity = async (selectedCity) => {
 
 const getWeatherImage = (code, isDay) => {
   const config = getWeatherConfig(code)
-  if (!config) return '/assets/icons/error.png'
+  if (!config) return '/assets/icons/error.svg'
 
   const icon = isDay ? config.icon : config.iconNight
-  return `/assets/icons/${icon}.png`
+  return `/assets/icons/${icon}.svg`
 }
 
 const weatherConfig = computed(() =>
@@ -473,7 +474,7 @@ watch(theme, (t) => {
         <section>
           <div class="main-info">
             <div class="temp">
-              <img :src="currentImage" alt="main image" class="mainImg">
+              <img :src="currentImage" alt="main image" width="80">
             </div>
             <div class="temp">
               <span class="main-temp">
@@ -534,7 +535,7 @@ watch(theme, (t) => {
           <div ref="chartRef" class="chart"></div>
           <div class="images-chart">
             <img v-for="(item, index) in todayChart" :key="index" :src="getWeatherImage(item.weather, item.isDay)"
-              width="12" height="12">
+              width="12" height="12" alt="">
           </div>
         </section>
         <section class="align-center">
@@ -542,7 +543,7 @@ watch(theme, (t) => {
           <div ref="chartTomorrowRef" class="chart"></div>
           <div class="images-chart">
             <img v-for="(item, index) in tomorrowChart" :key="index" :src="getWeatherImage(item.weather, item.isDay)"
-              width="12" height="12">
+              width="12" height="12" alt="">
           </div>
         </section>
         <section class="daydetails">
@@ -550,7 +551,7 @@ watch(theme, (t) => {
             <p>
               {{ new Date(day.date).toLocaleDateString([], { weekday: 'short' }) }}
             </p>
-            <img :src="getWeatherImage(day.weather, true)" width="48" height="45" />
+            <img :src="getWeatherImage(day.weather, true)" width="48" height="45" alt="" />
             <p v-if="day.min !== null" class="small">min {{ Math.round(day.min) }}°</p>
             <p v-if="day.max !== null" class="small">max {{ Math.round(day.max) }}°</p>
             <p v-if="day.proba_max !== null" class="small">🌧 {{ day.proba_max || 0 }}%</p>
@@ -610,8 +611,6 @@ watch(theme, (t) => {
               SEAMLESS
             </button>
           </div>
-        </section>
-        <section>
           <p class="d-flex small">
             <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="14px">
                 <path fill="#fff"
