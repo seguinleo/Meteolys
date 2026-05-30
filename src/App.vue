@@ -551,9 +551,9 @@ watch(theme, (t) => {
               {{ new Date(day.date).toLocaleDateString([], { weekday: 'short' }) }}
             </p>
             <img :src="getWeatherImage(day.weather, true)" width="48" height="45" />
-            <p v-if="day.min" class="small">min {{ Math.round(day.min) }}°</p>
-            <p v-if="day.max" class="small">max {{ Math.round(day.max) }}°</p>
-            <p v-if="day.proba_max" class="small">🌧 {{ day.proba_max || 0 }}%</p>
+            <p v-if="day.min !== null" class="small">min {{ Math.round(day.min) }}°</p>
+            <p v-if="day.max !== null" class="small">max {{ Math.round(day.max) }}°</p>
+            <p v-if="day.proba_max !== null" class="small">🌧 {{ day.proba_max || 0 }}%</p>
           </div>
         </section>
         <section class="plus-info">
