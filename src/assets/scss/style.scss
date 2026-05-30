@@ -406,6 +406,30 @@ header {
   z-index: 999;
 }
 
+.model-switch {
+  display: flex;
+  gap: .5rem;
+  margin: 10px auto;
+}
+
+.model-switch button {
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.3);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.model-switch button.active {
+  background: white;
+  color: black;
+}
+
+.d-flex {
+  display: flex;
+}
+
 footer {
   text-align: center;
   font-size: .8rem;

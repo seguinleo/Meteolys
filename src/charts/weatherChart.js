@@ -30,8 +30,8 @@ export function createWeatherChart(el, data, currentHour) {
   chart.setOption({
     grid: {
       top: 10,
-      left: 0,
-      right: 0,
+      left: 4,
+      right: 4,
       bottom: 20
     },
 
@@ -63,6 +63,7 @@ export function createWeatherChart(el, data, currentHour) {
     xAxis: {
       type: 'category',
       data: data.map(i => i.hour),
+      boundaryGap: false,
       axisLine: { show: false },
       axisTick: { show: false },
       axisLabel: {

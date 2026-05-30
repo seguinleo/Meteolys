@@ -6,7 +6,7 @@ export function getWeatherTheme(code, isDay) {
   if (!config) {
     return {
       name: 'default',
-      background: isDay ? '#4aa3ff' : '#1b1f2a',
+      background: isDay ? '#4aa3ff' : '#381a79',
       text: '#ffffff'
     }
   }
