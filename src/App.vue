@@ -387,12 +387,14 @@ watch(theme, (t) => {
 <template>
   <dialog v-if="location?.country === 'France' && globalVigilance" :open="showComponents && showAlertModal"
     class="alert-dialog">
-    <button class="close-dialog" @click="showAlertModal = false">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24">
-        <path fill="currentColor"
-          d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z" />
-      </svg>
-    </button>
+    <div class="alert-header">
+      <button class="close-dialog" @click="showAlertModal = false">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24">
+          <path fill="#fff"
+            d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z" />
+        </svg>
+      </button>
+    </div>
     <h2>
       Alertes vigilance
       <a href="https://meteofrance.com/" rel="noopener noreferrer">Météo-France</a>
@@ -423,13 +425,13 @@ watch(theme, (t) => {
           <button v-if="location?.country === 'France' && globalVigilance" type="button" aria-label="Alertes météo"
             class="alert-button" @click="showAlertModal = true">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-              <path fill="currentColor"
+              <path fill="#fff"
                 d="M320 64C334.7 64 348.2 72.1 355.2 85L571.2 485C577.9 497.4 577.6 512.4 570.4 524.5C563.2 536.6 550.1 544 536 544L104 544C89.9 544 76.8 536.6 69.6 524.5C62.4 512.4 62.1 497.4 68.8 485L284.8 85C291.8 72.1 305.3 64 320 64zM320 416C302.3 416 288 430.3 288 448C288 465.7 302.3 480 320 480C337.7 480 352 465.7 352 448C352 430.3 337.7 416 320 416zM320 224C301.8 224 287.3 239.5 288.6 257.7L296 361.7C296.9 374.2 307.4 384 319.9 384C332.5 384 342.9 374.3 343.8 361.7L351.2 257.7C352.5 239.5 338.1 224 319.8 224z" />
             </svg>
           </button>
           <button type="button" aria-label="Recherche" @click="showComponents = false">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-              <path fill="currentColor"
+              <path fill="#fff"
                 d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z" />
             </svg>
           </button>
@@ -503,7 +505,7 @@ watch(theme, (t) => {
             <div class="column">
               <div class="detail">
                 <svg width="18" height="18" viewBox="0 0 50 50">
-                  <path d="M25 5 L40 45 L25 35 L10 45 Z" fill="currentColor"
+                  <path d="M25 5 L40 45 L25 35 L10 45 Z" fill="#fff"
                     :transform="`rotate(${(weather?.current?.wind_direction_10m ?? 0) + 180} 25 25)`" />
                 </svg>
                 <span>
@@ -612,7 +614,7 @@ watch(theme, (t) => {
         <section>
           <p class="d-flex small">
             <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="14px">
-                <path fill="currentColor"
+                <path fill="#fff"
                   d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM288 224C288 206.3 302.3 192 320 192C337.7 192 352 206.3 352 224C352 241.7 337.7 256 320 256C302.3 256 288 241.7 288 224zM280 288L328 288C341.3 288 352 298.7 352 312L352 400L360 400C373.3 400 384 410.7 384 424C384 437.3 373.3 448 360 448L280 448C266.7 448 256 437.3 256 424C256 410.7 266.7 400 280 400L304 400L304 336L280 336C266.7 336 256 325.3 256 312C256 298.7 266.7 288 280 288z" />
               </svg></span>
             <span>Le modèle utilisé par défaut est le plus adapté à votre localisation et à l'horizon de prévision. Les

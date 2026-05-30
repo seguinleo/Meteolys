@@ -41,7 +41,7 @@ html {
 }
 
 ::selection {
-  color: #1c95ec;
+  color: #4aa3ff;
   background: #fff;
 }
 
@@ -70,7 +70,7 @@ p {
 }
 
 body {
-  background: #1c95ec;
+  background: #4aa3ff;
   margin: 0 1rem;
   min-height: 100svh;
   display: flex;
@@ -116,13 +116,15 @@ dialog.alert-dialog {
   z-index: 1000;
 }
 
+.alert-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .close-dialog {
-  top: 10px;
-  right: 10px;
-  margin-bottom: 1rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
 }
 
