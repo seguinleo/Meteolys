@@ -8,17 +8,25 @@ export const weatherConfig = [
     night: '#381a79'
   },
   {
-    codes: [1, 2],
-    icon: 'fewclouds',
-    iconNight: 'fewcloudsNight',
+    codes: [1],
+    icon: 'mostlyClear',
+    iconNight: 'mostlyClearNight',
+    label: 'Quelques nuages',
+    day: '#5198df',
+    night: '#2f1b5b'
+  },
+  {
+    codes: [2],
+    icon: 'partlyCloudy',
+    iconNight: 'partlyCloudyNight',
     label: 'Partiellement nuageux',
     day: '#5198df',
     night: '#2f1b5b'
   },
   {
     codes: [3],
-    icon: 'clouds',
-    iconNight: 'clouds',
+    icon: 'cloudy',
+    iconNight: 'cloudy',
     label: 'Nuageux',
     day: '#5a7c8f',
     night: '#372759'
@@ -26,16 +34,24 @@ export const weatherConfig = [
   {
     codes: [45, 48],
     icon: 'fog',
-    iconNight: 'fogNight',
+    iconNight: 'fog',
     label: 'Brouillard',
     day: '#6e9bb8',
     night: '#433267'
   },
   {
-    codes: [51, 53, 55, 56, 57],
+    codes: [51, 53, 55],
     icon: 'drizzle',
     iconNight: 'drizzle',
     label: 'Bruine',
+    day: '#6e9bb8',
+    night: '#433267'
+  },
+  {
+    codes: [56, 57],
+    icon: 'freezingDrizzle',
+    iconNight: 'freezingDrizzle',
+    label: 'Bruine verglaçante',
     day: '#6e9bb8',
     night: '#433267'
   },
@@ -48,17 +64,9 @@ export const weatherConfig = [
     night: '#2c243f'
   },
   {
-    codes: [80, 81, 82],
-    icon: 'shower',
-    iconNight: 'shower',
-    label: 'Averses',
-    day: '#3f5f7a',
-    night: '#2c243f'
-  },
-  {
     codes: [66, 67],
-    icon: 'rain',
-    iconNight: 'rain',
+    icon: 'freezingRain',
+    iconNight: 'freezingRain',
     label: 'Pluie verglaçante',
     day: '#3f5f7a',
     night: '#2c243f'
@@ -72,12 +80,28 @@ export const weatherConfig = [
     night: '#433267'
   },
   {
-    codes: [77, 85, 86],
-    icon: 'snow',
-    iconNight: 'snow',
-    label: 'Averses de neige',
+    codes: [77],
+    icon: 'snowGrains',
+    iconNight: 'snowGrains',
+    label: 'Flocons',
     day: '#6e9bb8',
     night: '#433267'
+  },
+  {
+    codes: [80, 81, 82],
+    icon: 'showers',
+    iconNight: 'showers',
+    label: 'Averses',
+    day: '#2f4353',
+    night: '#1c1726'
+  },
+  {
+    codes: [85, 86],
+    icon: 'snowShowers',
+    iconNight: 'snowShowers',
+    label: 'Averses de neige',
+    day: '#2f4353',
+    night: '#1c1726'
   },
   {
     codes: [95],
@@ -89,8 +113,8 @@ export const weatherConfig = [
   },
   {
     codes: [96, 99],
-    icon: 'storm',
-    iconNight: 'storm',
+    icon: 'heavyThunder',
+    iconNight: 'heavyThunder',
     label: 'Orage violent',
     day: '#2f4353',
     night: '#1c1726'

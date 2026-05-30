@@ -7,7 +7,8 @@ A local storage is used to save the last city.
 French weather alerts are managed by Météo-France.
 
 Charts for forecasts are displayed with [Echarts](https://echarts.apache.org/en/index.html).
-[Weather icons](https://icons8.com/icons/set/weather--style-keek).
+
+[Weather icons](https://github.com/mrdarrengriffin/google-weather-icons).
 
 ## For developers
 
