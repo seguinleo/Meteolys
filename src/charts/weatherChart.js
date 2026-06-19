@@ -53,6 +53,7 @@ export function createWeatherChart(el, data, currentHour) {
                 transform="rotate(${(d.wind_direction ?? 0) + 180} 25 25)" />
             </svg> ${d.wind}km/h<br/>
           💧 Humidité : ${d.humidity}%<br/>
+          🌧️ Proba. pluie : ${d.precipitation_proba}%<br/>
           🌧️ Précipita. : ${d.precipitation}mm<br/>
           ☀️ UV : ${d.uv}<br/>
           ⛰️ Pression : ${d.pressure}hPa
@@ -73,7 +74,7 @@ export function createWeatherChart(el, data, currentHour) {
 
     yAxis: [
       { type: 'value', show: false, min: yMin, max: yMax },
-      { type: 'value', show: false, max: 100 }
+      { type: 'value', show: false }
     ],
 
     series: [
@@ -85,6 +86,7 @@ export function createWeatherChart(el, data, currentHour) {
           wind: i.wind,
           wind_direction: i.wind_direction,
           humidity: i.humidity,
+          precipitation_proba: i.precipitation_proba,
           precipitation: i.precipitation,
           uv: i.uv,
           pressure: i.pressure,
