@@ -49,10 +49,8 @@ const setError = (msg) => {
   }, 5000)
 }
 
-let canFetch = true;
-
 const changeModel = async (model) => {
-  if (!canFetch) return
+  if (loading.value) return
   if (weatherModel.value === model) weatherModel.value = ''
   else weatherModel.value = model
 
@@ -62,13 +60,7 @@ const changeModel = async (model) => {
 }
 
 const fetchWeather = async () => {
-  if (!canFetch) return
-
-  canFetch = false
-
-  setTimeout(() => {
-    canFetch = true
-  }, 500)
+  if (loading.value) return
 
   weather.value = null
   vigilance.value = null
@@ -110,12 +102,7 @@ const fetchWeather = async () => {
 }
 
 const selectCity = async (selectedCity) => {
-  if (!canFetch) return
-
-  canFetch = false
-  setTimeout(() => {
-    canFetch = true
-  }, 2000)
+  if (loading.value) return
 
   try {
     loading.value = true
@@ -289,6 +276,7 @@ const buildChartData = (start, end) => {
     return {
       hour: new Date(time).getHours(),
       temp: hourly.temperature_2m[index],
+      precipitation_proba: hourly.precipitation_probability[index],
       precipitation: hourly.precipitation[index],
       wind: hourly.wind_speed_10m[index],
       wind_direction: hourly.wind_direction_10m[index],
@@ -546,7 +534,7 @@ watch(theme, (t) => {
             <p>
               {{ new Date(day.date).toLocaleDateString([], { weekday: 'short' }) }}
             </p>
-            <img :src="getWeatherImage(day.weather, true)" width="48" height="45" alt="" />
+            <img :src="getWeatherImage(day.weather, true)" width="48" height="48" alt="" />
             <p v-if="day.min !== null" class="small">min {{ Math.round(day.min) }}°</p>
             <p v-if="day.max !== null" class="small">max {{ Math.round(day.max) }}°</p>
             <p v-if="day.proba_max !== null" class="small">🌧 {{ day.proba_max || 0 }}%</p>
@@ -555,9 +543,7 @@ watch(theme, (t) => {
         <section class="plus-info">
           <div>
             <p class="small">Qualité air</p>
-            <p>AQI {{ aqi?.current?.european_aqi }}
-              <span class="small">{{ aqi?.hourly?.pm2_5[0] }}µg/m³</span>
-            </p>
+            <p>AQI {{ aqi?.current?.european_aqi }}</p>
           </div>
           <div>
             <p class="small">Couverture nuageuse</p>
@@ -601,10 +587,6 @@ watch(theme, (t) => {
               @click="changeModel('meteofrance_arpege_europe')">
               ARPEGE
             </button>
-            <button type="button" :class="{ active: weatherModel === 'meteofrance_seamless' }"
-              @click="changeModel('meteofrance_seamless')">
-              SEAMLESS
-            </button>
           </div>
           <p class="d-flex small">
             <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="14px">
@@ -612,7 +594,7 @@ watch(theme, (t) => {
                   d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM288 224C288 206.3 302.3 192 320 192C337.7 192 352 206.3 352 224C352 241.7 337.7 256 320 256C302.3 256 288 241.7 288 224zM280 288L328 288C341.3 288 352 298.7 352 312L352 400L360 400C373.3 400 384 410.7 384 424C384 437.3 373.3 448 360 448L280 448C266.7 448 256 437.3 256 424C256 410.7 266.7 400 280 400L304 400L304 336L280 336C266.7 336 256 325.3 256 312C256 298.7 266.7 288 280 288z" />
               </svg></span>
             <span>Le modèle utilisé par défaut est le plus adapté à votre localisation. Les modèles Météo-France
-              permettent d'obtenir des prévisions affinées (pluie en cours, orages...).</span>
+              permettent d'obtenir des prévisions affinées (précipitations, orages...).</span>
           </p>
         </section>
         <footer>
