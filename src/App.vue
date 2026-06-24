@@ -402,7 +402,7 @@ watch(selectedDayChart, async (data) => {
         {{ alert.icon }}
         {{ alert.type }}
       </h3>
-      <p>Vigilance {{ alert.level }}</p>
+      <p>VIGILANCE {{ alert.level }}</p>
     </div>
   </dialog>
   <div class="wrapper">
@@ -420,13 +420,6 @@ watch(selectedDayChart, async (data) => {
           </p>
         </div>
         <div>
-          <button v-if="location?.country === 'France' && globalVigilance" type="button" aria-label="Alertes météo"
-            class="alert-button" @click="showAlertModal = true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-              <path fill="#fff"
-                d="M320 64C334.7 64 348.2 72.1 355.2 85L571.2 485C577.9 497.4 577.6 512.4 570.4 524.5C563.2 536.6 550.1 544 536 544L104 544C89.9 544 76.8 536.6 69.6 524.5C62.4 512.4 62.1 497.4 68.8 485L284.8 85C291.8 72.1 305.3 64 320 64zM320 416C302.3 416 288 430.3 288 448C288 465.7 302.3 480 320 480C337.7 480 352 465.7 352 448C352 430.3 337.7 416 320 416zM320 224C301.8 224 287.3 239.5 288.6 257.7L296 361.7C296.9 374.2 307.4 384 319.9 384C332.5 384 342.9 374.3 343.8 361.7L351.2 257.7C352.5 239.5 338.1 224 319.8 224z" />
-            </svg>
-          </button>
           <button type="button" aria-label="Recherche" @click="showComponents = false">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
               <path fill="#fff"
@@ -464,10 +457,19 @@ watch(selectedDayChart, async (data) => {
         </div>
       </form>
       <template v-if="showComponents">
-        <div v-if="globalVigilance" class="vigilance-message" :class="globalVigilance.class">
-          Vigilance
-          {{ globalVigilance.label }}
-        </div>
+        <section class="align-center">
+          <button v-if="globalVigilance" type="button" class="vigilance-message" :class="globalVigilance.class"
+            @click="showAlertModal = true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" viewBox="0 0 640 640">
+              <path fill="#000"
+                d="M320 64C334.7 64 348.2 72.1 355.2 85L571.2 485C577.9 497.4 577.6 512.4 570.4 524.5C563.2 536.6 550.1 544 536 544L104 544C89.9 544 76.8 536.6 69.6 524.5C62.4 512.4 62.1 497.4 68.8 485L284.8 85C291.8 72.1 305.3 64 320 64zM320 416C302.3 416 288 430.3 288 448C288 465.7 302.3 480 320 480C337.7 480 352 465.7 352 448C352 430.3 337.7 416 320 416zM320 224C301.8 224 287.3 239.5 288.6 257.7L296 361.7C296.9 374.2 307.4 384 319.9 384C332.5 384 342.9 374.3 343.8 361.7L351.2 257.7C352.5 239.5 338.1 224 319.8 224z" />
+            </svg>
+            <span>
+              VIGILANCE
+              {{ globalVigilance.label }}
+            </span>
+          </button>
+        </section>
         <section>
           <div class="main-info">
             <div class="temp">
@@ -546,16 +548,19 @@ watch(selectedDayChart, async (data) => {
           </div>
         </section>
         <section class="daydetails">
-          <div v-for="(day, index) in dailyForecast" :key="index" class="column daycolumn"
+          <button v-for="(day, index) in dailyForecast" :key="index" class="column daycolumn"
             @click="selectedDayIndex = index + 1">
             <p>
               {{ new Date(day.date).toLocaleDateString([], { weekday: 'short' }) }}
             </p>
             <img :src="getWeatherImage(day.weather, true)" width="48" height="48" alt="" />
-            <p v-if="day.min !== null" class="small">min {{ Math.round(day.min) }}°</p>
-            <p v-if="day.max !== null" class="small">max {{ Math.round(day.max) }}°</p>
+            <p v-if="day.min !== null" class="small">
+              <span class="min">{{ Math.round(day.min) }}°</span>
+              |
+              <span class="max">{{ Math.round(day.max) }}°</span>
+            </p>
             <p v-if="day.proba_max !== null" class="small">🌧 {{ day.proba_max || 0 }}%</p>
-          </div>
+          </button>
         </section>
         <section class="plus-info">
           <div>

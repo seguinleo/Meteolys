@@ -1,21 +1,21 @@
 export const vigilanceColors = {
   1: {
-    label: 'Vert',
+    label: '',
     class: 'green',
     hex: '#2e7d32'
   },
   2: {
-    label: 'Jaune',
+    label: 'JAUNE',
     class: 'yellow',
     hex: '#f9a825'
   },
   3: {
-    label: 'Orange',
+    label: 'ORANGE',
     class: 'orange',
     hex: '#ef6c00'
   },
   4: {
-    label: 'Rouge',
+    label: 'ROUGE',
     class: 'red',
     hex: '#c62828'
   }
