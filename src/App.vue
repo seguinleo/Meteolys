@@ -23,8 +23,8 @@ const vigilance = ref(null)
 const selectedDayIndex = ref(1)
 const chartRef = ref(null)
 let chartInstance = null
-const chartTomorrowRef = ref(null)
-let chartTomorrowInstance = null
+const chartSelectedDayRef = ref(null)
+let chartSelectedDayInstance = null
 const showAlertModal = ref(false)
 const showComponents = ref(false)
 
@@ -35,7 +35,7 @@ const handleResize = () => {
 
   resizeTimeout = setTimeout(() => {
     chartInstance?.resize()
-    chartTomorrowInstance?.resize()
+    chartSelectedDayInstance?.resize()
   }, 100)
 }
 
@@ -164,9 +164,9 @@ const selectCity = async (selectedCity) => {
       currentHour: getCurrentHourIndex()
     })
 
-    chartTomorrowInstance = await renderWeatherChart({
-      chartRef: chartTomorrowRef,
-      instance: chartTomorrowInstance,
+    chartSelectedDayInstance = await renderWeatherChart({
+      chartRef: chartSelectedDayRef,
+      instance: chartSelectedDayInstance,
       data: selectedDayChart.value
     })
 
@@ -363,7 +363,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 
   chartInstance?.dispose()
-  chartTomorrowInstance?.dispose()
+  chartSelectedDayInstance?.dispose()
 })
 
 watch(theme, (t) => {
@@ -374,9 +374,9 @@ watch(theme, (t) => {
 }, { immediate: true })
 
 watch(selectedDayChart, async (data) => {
-  chartTomorrowInstance = await renderWeatherChart({
-    chartRef: chartTomorrowRef,
-    instance: chartTomorrowInstance,
+  chartSelectedDayInstance = await renderWeatherChart({
+    chartRef: chartSelectedDayRef,
+    instance: chartSelectedDayInstance,
     data
   })
 })
@@ -539,9 +539,9 @@ watch(selectedDayChart, async (data) => {
           <p class="small">
             {{ new Date(weather.daily.time[selectedDayIndex]).toLocaleDateString([], { weekday: 'short' }) }}
           </p>
-          <div ref="chartTomorrowRef" class="chart"></div>
+          <div ref="chartSelectedDayRef" class="chart"></div>
           <div class="images-chart">
-            <img v-for="(item, index) in tomorrowChart" :key="index" :src="getWeatherImage(item.weather, item.isDay)"
+            <img v-for="(item, index) in selectedDayChart" :key="index" :src="getWeatherImage(item.weather, item.isDay)"
               width="12" height="12" alt="">
           </div>
         </section>
