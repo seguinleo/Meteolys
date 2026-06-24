@@ -554,12 +554,12 @@ watch(selectedDayChart, async (data) => {
               {{ new Date(day.date).toLocaleDateString([], { weekday: 'short' }) }}
             </p>
             <img :src="getWeatherImage(day.weather, true)" width="48" height="48" alt="" />
-            <p v-if="day.min !== null" class="small">
+            <p v-if="day.min !== null">
               <span class="min">{{ Math.round(day.min) }}°</span>
               |
               <span class="max">{{ Math.round(day.max) }}°</span>
             </p>
-            <p v-if="day.proba_max !== null" class="small">🌧 {{ day.proba_max || 0 }}%</p>
+            <p v-if="day.proba_max !== null">🌧 {{ day.proba_max || 0 }}%</p>
           </button>
         </section>
         <section class="plus-info">
