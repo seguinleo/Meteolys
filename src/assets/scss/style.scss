@@ -319,6 +319,11 @@ header {
   padding: 7px 10px;
   margin: 0;
   min-width: 100px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, .2);
+  }
 
   img {
     margin: 5px 0;
@@ -421,7 +426,7 @@ header {
 .model-switch button {
   padding: .35rem .75rem;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.3);
+  border: 1px solid rgba(255, 255, 255, .3);
   background: transparent;
   color: white;
   cursor: pointer;

@@ -20,6 +20,7 @@ const weather = ref(null)
 const aqi = ref(null)
 const currentImage = ref(null)
 const vigilance = ref(null)
+const selectedDayIndex = ref(1)
 const chartRef = ref(null)
 let chartInstance = null
 const chartTomorrowRef = ref(null)
@@ -166,7 +167,7 @@ const selectCity = async (selectedCity) => {
     chartTomorrowInstance = await renderWeatherChart({
       chartRef: chartTomorrowRef,
       instance: chartTomorrowInstance,
-      data: tomorrowChart.value
+      data: selectedDayChart.value
     })
 
     localStorage.setItem(
@@ -291,7 +292,12 @@ const buildChartData = (start, end) => {
 
 const todayChart = computed(() => buildChartData(0, 24))
 
-const tomorrowChart = computed(() => buildChartData(24, 48))
+const selectedDayChart = computed(() => {
+  const start = selectedDayIndex.value * 24
+  const end = start + 24
+
+  return buildChartData(start, end)
+})
 
 const dailyForecast = computed(() => {
   if (!weather.value?.daily) return []
@@ -366,6 +372,14 @@ watch(theme, (t) => {
   document.body.style.background = t.background
   document.body.style.color = t.text
 }, { immediate: true })
+
+watch(selectedDayChart, async (data) => {
+  chartTomorrowInstance = await renderWeatherChart({
+    chartRef: chartTomorrowRef,
+    instance: chartTomorrowInstance,
+    data
+  })
+})
 </script>
 
 <template>
@@ -522,7 +536,9 @@ watch(theme, (t) => {
           </div>
         </section>
         <section class="align-center">
-          <p class="small">Demain</p>
+          <p class="small">
+            {{ new Date(weather.daily.time[selectedDayIndex]).toLocaleDateString([], { weekday: 'short' }) }}
+          </p>
           <div ref="chartTomorrowRef" class="chart"></div>
           <div class="images-chart">
             <img v-for="(item, index) in tomorrowChart" :key="index" :src="getWeatherImage(item.weather, item.isDay)"
@@ -530,7 +546,8 @@ watch(theme, (t) => {
           </div>
         </section>
         <section class="daydetails">
-          <div v-for="(day, index) in dailyForecast" :key="index" class="column daycolumn">
+          <div v-for="(day, index) in dailyForecast" :key="index" class="column daycolumn"
+            @click="selectedDayIndex = index + 1">
             <p>
               {{ new Date(day.date).toLocaleDateString([], { weekday: 'short' }) }}
             </p>
