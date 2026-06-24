@@ -215,12 +215,16 @@ header {
 }
 
 .vigilance-message {
-  margin: 5px 8px;
-  padding: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
   border-radius: 10px;
-  text-align: center;
+  border: none;
+  width: 95%;
   font-weight: 700;
   color: #000;
+  cursor: pointer;
 }
 
 .vigilance-card {
@@ -235,11 +239,19 @@ header {
 }
 
 .orange {
-  background: #ffb82b !important;
+  background: #ffa32b !important;
 }
 
 .red {
-  background: #c62828 !important;
+  background: #fc3333 !important;
+}
+
+.min {
+  color: #c9e4ff;
+}
+
+.max {
+  color: #ffd8a5;
 }
 
 .main-info {
@@ -320,12 +332,14 @@ header {
   margin: 0;
   min-width: 100px;
   cursor: pointer;
+  color: #fff;
+  border: none;
 
   &:hover {
     background: rgba(255, 255, 255, .2);
   }
 
-  img {
+  img, p {
     margin: 5px 0;
   }
 }
