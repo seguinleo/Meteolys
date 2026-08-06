@@ -10,8 +10,8 @@
     "scss": "sass --watch src/assets/scss/style.scss src/assets/css/style.min.css --style compressed --no-source-map"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "^2.17.2",
+    "@dotenvx/dotenvx": "^2.19.2",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.6.0"
+    "express-rate-limit": "^8.6.2"
   }
 }
