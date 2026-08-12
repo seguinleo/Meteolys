@@ -36,8 +36,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-user-select: none;
   user-select: none;
-  scroll-behavior: smooth;
-  scrollbar-color: rgba(150, 150, 150, .5) rgba(0, 0, 0, 0);
+  scrollbar-color: rgba(150, 150, 150, .4) transparent;
   scrollbar-width: thin;
   font-family: OpenSans, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
@@ -47,13 +46,13 @@ html {
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+\::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, .4);
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(150, 150, 150, .5);
+\::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
 }
 
 ::selection {
@@ -91,6 +90,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: .9rem;
 }
 
 svg {
