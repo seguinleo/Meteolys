@@ -1,10 +1,6 @@
 import express from 'express'
 import rateLimit from 'express-rate-limit'
-import dotenvx from '@dotenvx/dotenvx'
-
-dotenvx.config({
-  path: '.env.local'
-})
+import 'dotenv/config'
 
 const app = express()
 
